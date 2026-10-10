@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="nav"></div>
+<main>
+<div class="grid g3" id="pstats"></div>
+<div class="grid g2">
+  <div class="card"><h3>Allocation</h3><canvas id="donut" class="chart" style="height:180px"></canvas></div>
+  <div class="card"><h3>P&amp;L over time</h3><canvas id="pnl" class="chart" style="height:180px"></canvas></div>
+</div>
+<div class="card"><h3>Holdings</h3><div id="holdings"><div class="skeleton"></div></div></div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/portfolio.js"></script>
+</body>
+</html>

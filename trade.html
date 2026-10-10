@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - Trade</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="nav"></div>
+<main>
+<div class="trade-grid">
+  <div class="card" id="ladder"></div>
+  <div class="stack">
+    <div class="card">
+      <div class="hdr"><h3 id="ptitle">Price (live)</h3><span class="big" id="lastbig">-</span><span class="mono" id="chg"></span></div>
+      <div class="tabs" id="tabs">
+        <button class="btn small" data-tf="60">1m</button>
+        <button class="btn small ghost" data-tf="300">5m</button>
+        <button class="btn small ghost" data-tf="0">All</button>
+        <button class="btn small sp" data-m="line">Line</button>
+        <button class="btn small ghost" data-m="candle">Candles</button>
+      </div>
+      <div class="wrap"><canvas id="price" class="chart" style="height:240px" role="img" aria-label="Live price chart"></canvas><div class="tip" id="ptip"></div></div>
+      <canvas id="vol" class="chart" style="height:70px" role="img" aria-label="Recent trade volume"></canvas>
+    </div>
+    <div class="card"><h3>Market depth <span class="muted" style="text-transform:none">(hover for details)</span></h3>
+      <div class="wrap"><canvas id="depth" class="chart" style="height:180px" role="img" aria-label="Market depth chart"></canvas><div class="tip" id="tip"></div></div>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card"><h3>Place order</h3>
+      <div class="row2" style="margin-bottom:12px"><button class="btn buy" id="sideBuy">BUY</button><button class="btn ghost" id="sideSell">SELL</button></div>
+      <div class="row2" style="margin-bottom:12px"><button class="btn small" id="typeLimit">LIMIT</button><button class="btn small ghost" id="typeMarket">MARKET</button></div>
+      <div class="field"><label id="priceLabel">Price (USD)</label><input id="price_in" type="number" step="0.01" min="0"></div>
+      <div class="order-hint" id="limitHint" aria-live="polite"></div>
+      <div class="field"><label>Quantity</label><input id="qty_in" type="number" step="1" min="1"><div class="err" id="oerr"></div></div>
+      <div class="muted" style="font-size:12px;margin-bottom:4px">Est. total: <span id="total">-</span></div>
+      <div class="muted" style="font-size:12px;margin-bottom:8px" id="avail">Available: -</div>
+      <button class="btn buy" id="submit" style="width:100%">BUY</button>
+      <div class="order-result" id="orderResult" role="status" aria-live="polite" hidden></div>
+    </div>
+    <div class="card"><h3>My open orders</h3><div id="orders"><div class="skeleton"></div></div></div>
+    <div class="card"><h3>Live trade feed</h3><div class="feed" id="feed"></div></div>
+  </div>
+</div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/trade.js"></script>
+</body>
+</html>

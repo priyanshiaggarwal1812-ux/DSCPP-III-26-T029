@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - My Stocks</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="nav"></div>
+<main>
+<div class="trade-grid" style="grid-template-columns:minmax(260px,320px) 1fr">
+  <div class="card"><h3>List your own stock</h3>
+    <div class="muted" style="font-size:12px;margin-bottom:12px">You become the owner of every share. Sell them on the Trade page; other users can buy and resell.</div>
+    <div class="field"><label>Ticker (3-5 letters)</label><input id="f_sym" maxlength="5" autocomplete="off" style="text-transform:uppercase"></div>
+    <div class="field"><label>Company / stock name</label><input id="f_name" maxlength="40" autocomplete="off"></div>
+    <div class="field"><label>Total shares</label><input id="f_supply" type="number" step="1" min="100"></div>
+    <div class="field"><label>Starting price (USD)</label><input id="f_price" type="number" step="0.01" min="0"><div class="err" id="f_err"></div></div>
+    <button class="btn" id="f_go" style="width:100%">LIST STOCK</button>
+  </div>
+  <div class="stack">
+    <div class="card"><h3>Stocks listed by users</h3><div id="ulist"><div class="skeleton"></div></div></div>
+    <div class="card"><h3>Company stocks</h3><div id="clist"></div></div>
+  </div>
+</div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/stocks.js"></script>
+</body>
+</html>

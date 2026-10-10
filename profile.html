@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="nav"></div>
+<main>
+<div class="narrow stack" style="margin:0">
+  <div class="card"><h3>Account</h3>
+    <div style="font-size:18px;font-weight:700" id="uname"></div>
+    <div class="mono" style="color:var(--warn)" id="accid"></div>
+    <p class="muted profile-note">Account identity is managed by the trading service.</p></div>
+  <div class="card"><h3>Contact details</h3>
+    <div class="field"><label for="pname">Name</label><input id="pname" maxlength="80" autocomplete="name"></div>
+    <div class="field"><label for="pemail">Email</label><input id="pemail" type="email" maxlength="254" autocomplete="email"></div>
+    <div class="field"><label for="pphone">Phone</label><input id="pphone" type="tel" maxlength="30" autocomplete="tel"></div>
+    <button class="btn" id="saveProfile">Save details</button>
+    <p class="muted profile-note">Contact details are saved only in this browser and are not sent to the backend.</p></div>
+  <div class="card"><h3>Change password</h3>
+    <div class="field"><label>Current password</label><input id="oldp" type="password"></div>
+    <div class="field"><label>New password</label><input id="newp" type="password"></div>
+    <button class="btn" id="upd">Update password</button></div>
+  <button class="btn sell" id="logout2">Logout</button>
+</div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/profile.js"></script>
+</body>
+</html>
