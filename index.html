@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080e19">
+  <meta name="description" content="TradeX is a real-time stock trading simulator with a live order book, market depth, portfolio tracking, and trade history.">
+  <title>TradeX - See the market differently</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="landing-page">
+<header class="landing-nav">
+  <a class="landing-brand" href="index.html" aria-label="TradeX home"><span class="brand-mark">T</span> Trade<span>X</span></a>
+  <nav aria-label="Main navigation">
+    <a href="#platform">Platform</a>
+    <a href="#features">Features</a>
+  </nav>
+  <div class="landing-nav-actions">
+    <a class="landing-login" href="login.html">Log in</a>
+    <a class="btn landing-nav-cta" href="login.html?mode=register">Create account <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+
+<main class="landing-main">
+  <section class="landing-hero" id="platform">
+    <div class="hero-copy">
+      <div class="hero-eyebrow"><span class="live-dot"></span> YOUR MARKET. YOUR NEXT MOVE.</div>
+      <h1>Read the market.<br><span>Make your move.</span></h1>
+      <p class="hero-description">A clearer way to explore trading. Follow live order books, understand market depth, and manage your portfolio — all from one focused workspace.</p>
+      <div class="hero-actions">
+        <a class="btn hero-primary" href="login.html?mode=register">Get started <span aria-hidden="true">→</span></a>
+        <a class="hero-secondary" href="login.html">I already have an account <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-trust"><span class="trust-icon">✓</span> A simulated trading environment to learn and explore</div>
+    </div>
+
+    <div class="market-preview" aria-label="Illustration of a stock market chart and order book">
+      <div class="preview-topline"><span><i class="live-dot"></i> MARKET PREVIEW</span><span class="preview-market">NASDAQ <b>↗</b></span></div>
+      <div class="preview-quote">
+        <div><span class="preview-symbol">AAPL</span><span class="preview-company">Apple Inc.</span></div>
+        <div class="preview-price">$192.42 <span>+2.86%</span></div>
+      </div>
+      <div class="preview-chart">
+        <div class="chart-label chart-label-top">$194</div>
+        <div class="chart-label chart-label-bottom">$188</div>
+        <svg viewBox="0 0 560 190" role="img" aria-label="Illustrative rising stock price chart" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#32d296" stop-opacity=".28"/>
+              <stop offset="100%" stop-color="#32d296" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="preview-area" d="M0 150 L35 137 L68 145 L100 116 L134 128 L169 105 L204 119 L238 86 L270 96 L306 72 L340 83 L375 54 L408 67 L443 39 L478 55 L512 27 L540 40 L560 18 L560 190 L0 190 Z"/>
+          <path class="preview-line" d="M0 150 L35 137 L68 145 L100 116 L134 128 L169 105 L204 119 L238 86 L270 96 L306 72 L340 83 L375 54 L408 67 L443 39 L478 55 L512 27 L540 40 L560 18"/>
+          <circle cx="560" cy="18" r="5" class="preview-point"/>
+        </svg>
+        <div class="preview-time"><span>09:30</span><span>11:00</span><span>12:30</span><span>14:00</span><span>16:00</span></div>
+      </div>
+      <div class="preview-bottom">
+        <div class="preview-depth">
+          <div class="preview-section-title">ORDER BOOK <span>PRICE <span>SIZE</span></span></div>
+          <div class="depth-row sell-depth"><i style="width:68%"></i><span>$192.48</span><span>240</span></div>
+          <div class="depth-row sell-depth"><i style="width:42%"></i><span>$192.45</span><span>180</span></div>
+          <div class="depth-row spread-depth"><span>SPREAD <b>$0.03</b></span><span>LAST <b>$192.42</b></span></div>
+          <div class="depth-row buy-depth"><i style="width:58%"></i><span>$192.40</span><span>320</span></div>
+          <div class="depth-row buy-depth"><i style="width:82%"></i><span>$192.37</span><span>460</span></div>
+        </div>
+        <div class="preview-side-card"><span class="side-card-icon">↗</span><span class="side-card-label">MARKET DEPTH</span><strong>In focus</strong><div class="depth-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="side-card-note">Bids meet asks</span></div>
+      </div>
+      <div class="preview-footnote"><span><i class="live-dot"></i> Illustration</span><span>Trading involves risk</span></div>
+    </div>
+    <div class="hero-orb hero-orb-one"></div>
+    <div class="hero-orb hero-orb-two"></div>
+  </section>
+
+  <section class="landing-feature-strip" id="features">
+    <div class="strip-heading"><span>BUILT FOR A CLOSER LOOK</span><h2>Everything in view.<br class="mobile-break"> Nothing in the way.</h2></div>
+    <div class="landing-features">
+      <article class="landing-feature"><span class="feature-number">01</span><div class="feature-icon">⌁</div><h3>Follow the flow</h3><p>Explore live prices, recent trades, and the order book in a responsive trading workspace.</p></article>
+      <article class="landing-feature"><span class="feature-number">02</span><div class="feature-icon">▥</div><h3>See the full picture</h3><p>Review market depth, portfolio allocation, holdings, and performance at a glance.</p></article>
+      <article class="landing-feature"><span class="feature-number">03</span><div class="feature-icon">↗</div><h3>Stay in control</h3><p>Place and cancel orders, keep a watchlist, and export your trade history when you need it.</p></article>
+    </div>
+  </section>
+
+  <section class="landing-bottom-cta">
+    <div><span class="hero-eyebrow">A MARKET VIEW THAT MAKES SENSE</span><h2>Ready to take a closer look?</h2></div>
+    <a class="btn hero-primary" href="login.html?mode=register">Enter TradeX <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+<footer class="landing-footer"><a class="landing-brand" href="index.html"><span class="brand-mark">T</span> Trade<span>X</span></a><span>TradeX · Stock market trading simulator</span><a href="login.html">Log in to your account</a></footer>
+</body>
+</html>

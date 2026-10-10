@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - History</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="nav"></div>
+<main>
+<div class="card"><div class="card-heading"><h3>Trade history</h3><button class="btn small" id="downloadTrades">Download CSV report</button></div>
+  <div class="row2" style="max-width:320px;margin-bottom:12px">
+    <select id="fSym"><option value="">All symbols</option></select>
+    <select id="fSide"><option value="">Both sides</option><option>BUY</option><option>SELL</option></select>
+  </div>
+  <div id="trades"><div class="skeleton"></div></div>
+</div>
+<div class="card" style="margin-top:12px"><h3>Order activity <span class="muted" style="text-transform:none">(placed, filled, cancelled, rejected)</span></h3><div id="olog"><div class="skeleton"></div></div></div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/history.js"></script>
+</body>
+</html>

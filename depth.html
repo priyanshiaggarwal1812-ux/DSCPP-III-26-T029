@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - Market Depth</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="nav"></div>
+<main>
+<div class="grid g4" id="dstats"></div>
+<div class="grid g4" id="dstats2"></div>
+<div class="card"><h3>Full market depth</h3><canvas id="depth" class="chart" style="height:380px"></canvas></div>
+<div class="grid g2e">
+  <div class="card"><h3>Bids (top 10)</h3><div id="lvbids"></div></div>
+  <div class="card"><h3>Asks (top 10)</h3><div id="lvasks"></div></div>
+</div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/depth.js"></script>
+</body>
+</html>

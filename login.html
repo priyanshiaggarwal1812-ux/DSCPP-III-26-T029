@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+<div class="login-wrap"><div class="login-card">
+  <h1>TradeX</h1>
+  <p class="muted">Real-time order book and matching system</p>
+  <div class="row2" style="margin-bottom:16px">
+    <button class="btn" id="tabLogin">Login</button>
+    <button class="btn ghost" id="tabReg">Register</button>
+  </div>
+  <div class="field"><label>Username</label><input id="user" autocomplete="username"></div>
+  <div class="field"><label>Password</label><input id="pass" type="password" autocomplete="current-password"></div>
+  <div class="err" id="err"></div>
+  <button class="btn" id="go" style="width:100%">LOG IN</button>
+  <p class="muted" id="hint" style="font-size:12px;display:none">A unique Account ID is generated when you register.</p>
+  <p class="simnote">TradeX is a simulated exchange. No real money is used, and you trade against bots and other simulated users.</p>
+</div></div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/pages/login.js"></script>
+</body>
+</html>
