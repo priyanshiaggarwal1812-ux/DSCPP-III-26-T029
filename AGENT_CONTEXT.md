@@ -100,10 +100,8 @@ Agree on the API contract and TX namespace first; everything else can be built i
 Done in this document: 8 pages, navbar and menu, login/register with validation, live price/volume/depth/donut/P&L canvas charts, order form, cancel, mock backend and mock live feed.
 Left: open in browser and fix any errors, timeframe tabs and candlesticks, table sorting, hover tooltips on charts, flash animation when a price changes, price history that survives page changes (currently resets per page load; could seed from the backend), real backend integration test, final mobile polish.
 
-## 8. Prompt to give another AI agent
-"Read this whole document. It is a vanilla HTML/CSS/JavaScript frontend (no frameworks, no build step) for the TradeX stock order book. Recreate the files exactly as given, open it in mock mode, fix any errors, then continue with section 7 without breaking the API contract or the rules in section 2."
 
-## 9. Added later
+## 8. Added later
 - History page has an Order activity table (GET /orderlog, new endpoint; History shows a message if the server lacks it).
 - Trade events may carry mine:true when the logged-in user was a party; the live feed shows a 'you' tag.
 - Click any table header to sort. Last price flashes green/red on change. New mock accounts start with no fake trades.
@@ -119,7 +117,7 @@ GET /metrics -> see section 10 (new shape)
 - The page polls every 1 s and draws two charts. The third chart (my order round-trip, ms) is measured in the browser around POST /order and needs nothing from the backend.
 - Mock mode returns simulated numbers and the page labels them MOCK DATA.
 
-## 10. Final merged version (tradex-frontend + pblfront + C++ design PDF)
+## 9. Final merged version (tradex-frontend + pblfront + C++ design PDF)
 - Base is tradex-frontend. From pblfront: landing page (index.html), dashboard moved to dashboard.html with the market-watch table (bid/ask/spread, sparklines, watchlist in localStorage), search + sort on tables (TX.interactiveTable), CSV trade report, order confirmation, visible Logout, contact details on Profile, hover details on line charts.
 - Aligned with the backend design PDF: POST /order sends `orderType` and `quantity`; order statuses are OPEN, PARTIALLY_FILLED, FILLED, CANCELLED (api.js maps the old PARTIAL, and accepts `quantity`, `remaining_quantity`, `order_type` in responses).
 - New endpoints (all optional: the page shows a message or falls back if one is missing):
