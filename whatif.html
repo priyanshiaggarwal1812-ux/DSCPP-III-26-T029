@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220"><title>TradeX - What If Simulator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .wi-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .wi-form label{display:block;color:var(--muted,#94a3b8);font-size:12px;margin-bottom:7px}
+    .wi-form input,.wi-form select{width:100%;padding:11px 12px;border:1px solid var(--line,#263449);border-radius:9px;background:var(--panel,#111c2e);color:inherit;font:inherit;box-sizing:border-box}
+    .wi-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+    .wi-quick{display:flex;gap:6px;margin-left:auto}
+    .wi-quick button{padding:6px 10px;font-size:12px}
+    .wi-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+    .wi-kpi{padding:14px;border:1px solid var(--line,#263449);border-radius:10px}
+    .wi-kpi .muted{font-size:12px}.wi-kpi strong{display:block;font-size:21px;margin-top:6px}.wi-kpi small{display:block;margin-top:4px;color:var(--muted,#94a3b8);font-size:11px}
+    .wi-chart{position:relative;margin-top:16px}.wi-chart canvas{width:100%;height:300px;display:block}
+    .wi-legend{display:flex;gap:16px;font-size:12px;color:var(--muted,#94a3b8);margin-top:6px;flex-wrap:wrap}
+    .wi-legend i{display:inline-block;width:18px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
+    .wi-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+    .wi-table th{color:var(--muted,#94a3b8);font-weight:500;text-align:right;padding:8px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+    .wi-table td{padding:9px 8px;text-align:right;border-top:1px solid var(--line,#263449);font-variant-numeric:tabular-nums}
+    .wi-table th:first-child,.wi-table td:first-child{text-align:left}
+    .wi-table tr.sel td{background:rgba(59,130,246,.10)}
+    .wi-note{font-size:12px;line-height:1.6;color:var(--muted,#94a3b8);margin-top:14px}
+    .positive{color:#22c55e}.negative{color:#ef4444}
+    @media(max-width:760px){.wi-form{grid-template-columns:1fr}.wi-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.wi-quick{margin-left:0}}
+  </style>
+</head>
+<body><div id="nav"></div><main>
+  <div class="card"><div class="card-heading"><h2>What-If Investment Simulator</h2><span class="muted">Simulated price history</span></div>
+    <p class="muted" style="font-size:13px;line-height:1.6;margin:0 0 14px">Pick a stock, a date and an amount. TradeX rebuilds a simulated daily price history up to today's live quote, so the price you would have paid depends on the date you choose.</p>
+    <div class="wi-form">
+      <div><label for="symbol">Stock</label><select id="symbol"></select></div>
+      <div><label for="buyDate">Purchase date</label><input id="buyDate" type="date"></div>
+      <div><label for="investment">Investment amount ($)</label><input id="investment" type="number" min="1" step="1" value="10000"></div>
+    </div>
+    <div class="wi-actions">
+      <button class="btn" id="calculate">Calculate</button>
+      <span class="muted" id="status" aria-live="polite"></span>
+      <div class="wi-quick" id="quick"><button class="btn ghost" data-m="1">1M</button><button class="btn ghost" data-m="6">6M</button><button class="btn ghost" data-m="12">1Y</button><button class="btn ghost" data-m="24">2Y</button></div>
+    </div>
+  </div>
+
+  <div id="results" style="display:none">
+    <div class="card" style="margin-top:12px">
+      <div class="wi-kpis">
+        <div class="wi-kpi"><div class="muted">Simulated buy price</div><strong id="buyPrice">—</strong><small id="sharesTxt"></small></div>
+        <div class="wi-kpi"><div class="muted">Value today</div><strong id="currentValue">—</strong><small id="curPrice"></small></div>
+        <div class="wi-kpi"><div class="muted">Profit / Loss</div><strong id="pnl">—</strong><small id="cagr"></small></div>
+        <div class="wi-kpi"><div class="muted">Worst dip along the way</div><strong id="maxDip">—</strong><small id="maxDipTxt"></small></div>
+      </div>
+      <div class="wi-chart"><canvas id="chart"></canvas></div>
+      <div class="wi-legend"><span><i style="border-color:#3b82f6"></i>Your investment value</span><span><i style="border-color:#8a9bb8;border-top-style:dashed"></i>Amount invested</span><span id="peakTxt"></span></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="card-heading"><h3>Same amount, same date: all stocks</h3></div>
+      <table class="wi-table"><thead><tr><th>Stock</th><th>Buy price</th><th>Price now</th><th>Value now</th><th>Return</th></tr></thead><tbody id="cmp"></tbody></table>
+      <p class="wi-note" id="details"></p>
+    </div>
+  </div>
+</main>
+<script src="js/config.js"></script><script src="js/utils.js"></script><script src="js/mock.js"></script><script src="js/api.js"></script><script src="js/store.js"></script><script src="js/charts.js"></script><script src="js/layout.js"></script><script src="js/pages/whatif.js"></script>
+</body></html>
