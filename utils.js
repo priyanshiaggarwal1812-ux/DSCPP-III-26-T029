@@ -1,5 +1,15 @@
 (function () {
   TX.$ = (s, r) => (r || document).querySelector(s);
+  document.querySelectorAll('[data-password-toggle]').forEach((button) => {
+    const input = document.getElementById(button.getAttribute('aria-controls'));
+    if (!input) return;
+    button.addEventListener('click', () => {
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      button.setAttribute('aria-pressed', String(show));
+      button.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
+  });
   TX.NAMES = { AAPL: 'Apple Inc.', MSFT: 'Microsoft Corp.', TSLA: 'Tesla Inc.', GOOG: 'Alphabet Inc.', AMZN: 'Amazon.com Inc.', NVDA: 'NVIDIA Corp.' };
   TX.nameOf = (s) => { const x = (TX.STOCKS || []).find((y) => y.symbol === s); return x && x.name && x.name !== s ? x.name : (TX.NAMES[s] || ''); };
   TX.chartRange = {
@@ -18,13 +28,12 @@
       return points.filter((point) => point.t >= cutoff);
     },
   };
-  // Tradable stocks = 6 company stocks + stocks listed by users. Cached per session, refreshed by layout.js from GET /stocks.
+  // The 6 fixed stocks. Cached per session, refreshed by layout.js from GET /quotes.
   TX.COMPANY = ['AAPL', 'MSFT', 'TSLA', 'GOOG', 'AMZN', 'NVDA'];
   TX.setStocks = (list) => {
     TX.STOCKS = list; TX.SYMBOLS = list.map((s) => s.symbol);
     try { sessionStorage.setItem('tradex-stocks', JSON.stringify(list)); } catch (e) { /* storage full */ }
   };
-  TX.isUserStock = (sym) => !!(TX.STOCKS || []).find((s) => s.symbol === sym && s.user);
   let cached = null;
   try { cached = JSON.parse(sessionStorage.getItem('tradex-stocks')); } catch (e) { cached = null; }
   TX.setStocks(Array.isArray(cached) && cached.length ? cached : TX.COMPANY.map((s) => ({ symbol: s, name: s, owner: null, user: false })));

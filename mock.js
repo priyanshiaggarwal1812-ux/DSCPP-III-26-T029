@@ -214,22 +214,6 @@
   const stockList = () => Object.keys(START).map((x) => ({ symbol: x, name: NAMES[x] || x, owner: null, user: false, price: S.last[x] || START[x] }))
     .concat(S.stocks.map((x) => ({ symbol: x.symbol, name: x.name, owner: x.owner, user: true, price: S.last[x.symbol] || x.price })));
 
-  // A user lists their own stock: they own all `supply` shares and can then SELL them to other traders.
-  function createStock(body) {
-    const sym = String(body.symbol || '').toUpperCase(), name = String(body.name || '').trim(), supply = body.supply, price = r2(body.price);
-    const me = (TX.auth && TX.auth.get() && TX.auth.get().username) || 'you';
-    if (!/^[A-Z]{3,5}$/.test(sym)) throw new Error('Ticker must be 3-5 letters');
-    if (known(sym)) throw new Error('Ticker ' + sym + ' is already taken');
-    if (name.length < 2 || name.length > 40) throw new Error('Name must be 2-40 characters');
-    if (!Number.isInteger(supply) || supply < 100 || supply > 1000000) throw new Error('Total shares must be a whole number from 100 to 1,000,000');
-    if (!(price > 0 && price < 1e6)) throw new Error('Starting price must be greater than 0');
-    if (S.stocks.filter((x) => x.owner === me).length >= 3) throw new Error('You can list at most 3 stocks');
-    S.stocks.push({ symbol: sym, name, owner: me, supply, price });
-    S.holdings[sym] = { qty: supply, avg: price }; // the founder starts with every share
-    S.last[sym] = price; save();
-    return { symbol: sym, name, owner: me, user: true, price };
-  }
-
   // Fake live feed: bots move the price and re-quote; the user's resting orders fill when the market reaches them.
   TX.startMockFeed = (symbol, emit, from) => {
     const first = [], b = book(symbol, from, first);
@@ -274,8 +258,6 @@
       return { token: 'mock-token', username: body.username, account_id: 'ACC-MOCK01' };
     }
     if (route === '/password') return { ok: true };
-    if (route === '/stocks' && method === 'POST') return createStock(body || {});
-    if (route === '/stocks') return stockList();
     if (route.startsWith('/book/')) { const b = book(route.slice(6)); return view(b); }
     if (route === '/order' && method === 'POST') return placeOrder(body || {});
     if (route.startsWith('/order/') && method === 'DELETE') return cancelOrder(+route.slice(7));
@@ -290,6 +272,7 @@
     if (route.startsWith('/candles/')) return candles(route.slice(9));
     if (route === '/receipts') return S.trades.map(receipt);
     if (route.startsWith('/receipts/')) { const t = S.trades.find((x) => x.id === +route.slice(10)); if (!t) throw new Error('Receipt not found'); return receipt(t); }
+    if (route === '/verify') return { valid: true, count: S.trades.length, last_hash: 'a38b55e102df014c' + S.trades.length, verified_at: Math.floor(Date.now() / 1000) };
     throw new Error('Mock: unknown route ' + route);
   };
   // Simulated engine counters (the real numbers come from the C++ engine). Uptime survives page changes.
@@ -304,7 +287,7 @@
     return { uptime_s: up, orders_total: total, trades_total: Math.floor(total * 0.37), orders_per_sec: mm.rate,
              avg_match_us: lat, p50_match_us: lat * 0.8, p95_match_us: lat * 2.6, p99_match_us: lat * 4.2, max_match_us: lat * 600,
              ram_bytes: Math.min(300, 28 + (total / 50000) * 4.2) * 1048576, open_orders: 1800 + Math.floor(Math.random() * 400),
-             bench_ram_us: lat, bench_db_us: 900 + Math.random() * 200 };
+             bench_ram_us: lat, bench_db_us: 900 + Math.random() * 200, bench_disk_orders: 1500 };
   }
   TX.mockReset = () => { try { sessionStorage.removeItem('tradex-metrics-start'); sessionStorage.removeItem('tradex-rtt'); sessionStorage.removeItem(KEY); } catch (e) { /* ignore */ } };
 })();
