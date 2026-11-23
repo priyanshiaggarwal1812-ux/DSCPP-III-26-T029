@@ -39,22 +39,19 @@
     if (p && p.side) q.set('side', p.side);
     return TX.api('GET', '/trades?' + q.toString());
   };
-  TX.getStocks = () => TX.api('GET', '/stocks');
-  TX.createStock = (s) => TX.api('POST', '/stocks', s);     // {symbol,name,supply,price}
-  TX.getOrderLog = () => TX.api('GET', '/orderlog');           // NEW: [{ts,id,symbol,side,type,price,qty,status,note}]
-  TX.getMetrics = () => TX.api('GET', '/metrics');            // NEW: engine speed counters (see AGENT_CONTEXT 5d)
+  TX.getOrderLog = () => TX.api('GET', '/orderlog');           // [{ts,id,symbol,side,type,price,qty,status,note}]
+  TX.getMetrics = () => TX.api('GET', '/metrics');            // flat engine speed counters
   TX.getPortfolio = () => TX.api('GET', '/portfolio');
 
   // ---- final-merge additions: tolerant response mapping + /quotes /candles /receipts ----
   const nq = (o) => Object.assign({}, o, { qty: o.qty != null ? o.qty : o.quantity, remaining: o.remaining != null ? o.remaining : o.remaining_quantity,
     type: o.type || o.order_type, status: o.status === 'PARTIAL' ? 'PARTIALLY_FILLED' : o.status });
-  const gO = TX.getOrders, gT = TX.getTrades, gL = TX.getOrderLog, gS = TX.getStocks;
+  const gO = TX.getOrders, gT = TX.getTrades, gL = TX.getOrderLog;
   TX.getOrders = async () => (await gO()).map(nq);
   TX.getTrades = async (p) => (await gT(p)).map(nq);
   TX.getOrderLog = async () => (await gL()).map(nq);
-  // /stocks (user-listed stocks) is optional; fall back to /quotes for the symbol list
-  TX.getStocks = async () => { try { return await gS(); } catch (e) { return (await TX.api('GET', '/quotes')).map((x) => ({ symbol: x.symbol, name: x.name, owner: null, user: false, price: x.last })); } };
   TX.getQuotes = () => TX.api('GET', '/quotes');                                   // [{symbol,name,last,change_pct,volume}]
   TX.getCandles = (symbol, tf) => TX.api('GET', '/candles/' + symbol + '?tf=' + (tf || '1m')); // [{t,o,h,l,c,v}] oldest first
   TX.getReceipts = async () => (await TX.api('GET', '/receipts')).map(nq);         // [{receipt_id,receipt_number,trade_id,ts,symbol,side,price,qty,total}]
+  TX.verifyLedger = () => TX.api('GET', '/verify');                                // SHA-256 trade chain audit
 })();
