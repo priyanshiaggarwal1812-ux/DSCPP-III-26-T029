@@ -1,6 +1,6 @@
 (function () {
   const LINKS = [['dashboard.html', 'Dashboard'], ['trade.html', 'Trade'], ['orders.html', 'Orders'],
-                 ['portfolio.html', 'Portfolio'], ['history.html', 'History'], ['depth.html', 'Market Depth'], ['stocks.html', 'My Stocks'], ['performance.html', 'Performance'], ['receipts.html', 'Receipts']];
+                 ['portfolio.html', 'Portfolio'], ['history.html', 'History'], ['depth.html', 'Market Depth'], ['performance.html', 'Performance'], ['whatif.html', 'What If'], ['receipts.html', 'Receipts']];
 
   // Call at the top of every protected page. Returns false (and redirects) when not logged in.
   TX.layout = {
@@ -19,10 +19,15 @@
         '<div class="dropdown" id="dd"><a href="profile.html">Profile</a></div></header>';
 
       const fillSel = () => {
-        $('#symSel').innerHTML = TX.STOCKS.map((s) => `<option value="${TX.esc(s.symbol)}"${s.symbol === M.symbol ? ' selected' : ''}>${TX.esc(s.symbol)}${s.user ? ' *' : ''}</option>`).join('');
+        $('#symSel').innerHTML = TX.STOCKS.map((s) => `<option value="${TX.esc(s.symbol)}"${s.symbol === M.symbol ? ' selected' : ''}>${TX.esc(s.symbol)}</option>`).join('');
       };
       fillSel();
-      TX.getStocks().then((l) => { TX.setStocks(l); fillSel(); }).catch(() => { /* keep cached list */ });
+      TX.getQuotes().then((quotes) => {
+        if (Array.isArray(quotes) && quotes.length) {
+          TX.setStocks(quotes.map((q) => ({ symbol: q.symbol, name: q.name, user: false, price: q.last })));
+          fillSel();
+        }
+      }).catch(() => { /* keep cached list */ });
       $('#menuBtn').onclick = () => $('#links').classList.toggle('open');
       $('#avatar').onclick = () => $('#dd').classList.toggle('open');
       $('#navLogout').onclick = () => TX.auth.logout();
